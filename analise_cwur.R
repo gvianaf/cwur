@@ -209,7 +209,7 @@ graf <- cwur_br_g %>%
   geom_text(data = cwur_br_g %>% filter(ano == max(ano)),
             aes(x = ano + .1, label = sigla), size = 5, hjust = 0) +
   scale_y_reverse(breaks = c(seq(1, 18))) +
-  scale_x_continuous(limits = c(2013, 2021),
+  scale_x_continuous(limits = c(2013.1, 2020.9),
                      breaks = c(2014, 2015, 2016, 2017, 2018, 2019, 2020)) +
   scale_color_manual(values = cores) +
   labs(title = "Evolução das Universidades Federais no Ranking CWUR",
@@ -221,7 +221,7 @@ graf <- cwur_br_g %>%
         axis.text.y = element_text(size = 10)) +
   annotate(geom = "curve", x = 2017, xend = 2018, y = 15, yend = 7.3,
            curvature = .3, arrow = arrow(length = unit(2, "mm"))) +
-  annotate(geom = "text", x = 2017, y = 15, hjust = "right",
+  annotate(geom = "text", x = 2017, y = 15, hjust = "right", family = "charter",
            label = "A partir de 2018, a metodologia do CWUR\nfoi revista e aprimorada")
 
 
