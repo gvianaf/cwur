@@ -192,6 +192,13 @@ cores <- c("UFRJ"    = "#A49E9E",
            "UFBA"    = "#A49E9E",
            "UnB"     = "#0F4C81")
 
+library(showtext)
+font_add("charter", "C:/Users/GUILHERME/AppData/Local/Microsoft/Windows/Fonts/Charter Regular.otf")
+showtext_auto()
+theme_set(theme_classic(base_family = "charter"))
+theme_update(legend.position = "none",
+             axis.line.y = element_blank(),
+             axis.line.x = element_blank())
 
 graf <- cwur_br_g %>% 
   ggplot(aes(x = ano, y = federal_rank, color = sigla)) +
@@ -202,25 +209,27 @@ graf <- cwur_br_g %>%
   geom_text(data = cwur_br_g %>% filter(ano == max(ano)),
             aes(x = ano + .1, label = sigla), size = 5, hjust = 0) +
   scale_y_reverse(breaks = c(seq(1, 18))) +
-  scale_x_continuous(limits = c(2013.4, 2020.6),
+  scale_x_continuous(limits = c(2013, 2021),
                      breaks = c(2014, 2015, 2016, 2017, 2018, 2019, 2020)) +
   scale_color_manual(values = cores) +
   labs(title = "Evolução das Universidades Federais no Ranking CWUR",
        subtitle = "A UnB destaca-se entre as melhores IES Federais, mantendo a 7ª posição nos últimos três anos",
        x = "Ano de divulgação do ranking",
        y = "") +
-  cowplot::theme_minimal_grid(font_size = 14, line_size = 0) +
-  theme(legend.position = "none",
-        panel.grid.major = element_blank(),
-        axis.title.x = element_text(hjust = 1),
+  # cowplot::theme_minimal_grid(font_size = 14, line_size = 0) +
+  theme(axis.title.x = element_text(hjust = 1),
         axis.text.y = element_text(size = 10)) +
   annotate(geom = "curve", x = 2017, xend = 2018, y = 15, yend = 7.3,
            curvature = .3, arrow = arrow(length = unit(2, "mm"))) +
   annotate(geom = "text", x = 2017, y = 15, hjust = "right",
            label = "A partir de 2018, a metodologia do CWUR\nfoi revista e aprimorada")
 
+
 graf
-ggsave("cwur-federais.png", dpi = 144, width = 8, height = 6)
+ggsave("cwur-federais.pdf", width = 8, height = 6, device = cairo_pdf)
+pdftools::pdf_convert("cwur-federais.pdf", format = "png", dpi = 350)
+
+showtext_auto(FALSE)
 
 # --- tabelas
 # tabela de série histórica da UnB
