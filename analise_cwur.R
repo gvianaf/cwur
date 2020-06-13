@@ -195,6 +195,7 @@ cores <- c("UFRJ"    = "#A49E9E",
 library(showtext)
 font_add("charter", "C:/Users/GUILHERME/AppData/Local/Microsoft/Windows/Fonts/Charter Regular.otf")
 font_add("charter-bold", "C:/Users/GUILHERME/AppData/Local/Microsoft/Windows/Fonts/Charter Bold.otf")
+font_add("fira", "C:/Users/GUILHERME/AppData/Local/Microsoft/Windows/Fonts/FiraSans-Regular.ttf")
 showtext_auto()
 
 theme_set(theme_classic(base_family = "charter"))
@@ -206,11 +207,11 @@ graf <- cwur_br_g %>%
   ggplot(aes(x = ano, y = federal_rank, color = sigla)) +
   geom_point(size = 4) +
   geom_bump(size = 2, smooth = 8) +
-  geom_text(data = cwur_br_g %>% filter(ano == min(ano)), family = "charter",
+  geom_text(data = cwur_br_g %>% filter(ano == min(ano)), family = "fira",
             aes(x = ano - .1, label = sigla), size = 5, hjust = 1) +
-  geom_text(data = cwur_br_g %>% filter(ano == max(ano)), family = "charter",
+  geom_text(data = cwur_br_g %>% filter(ano == max(ano)), family = "fira",
             aes(x = ano + .1, label = sigla), size = 5, hjust = 0) +
-  geom_text(data = cwur_br_g %>% filter(ano == max(ano)), family = "charter",
+  geom_text(data = cwur_br_g %>% filter(ano == max(ano)), family = "fira",
             aes(x = ano + 1.1, label = glue::glue("{federal_rank}ª"), size = 5, hjust = 0)) +
   scale_y_reverse(breaks = c(seq(1, 18))) +
   scale_x_continuous(limits = c(2013.3, 2021.2),
@@ -226,7 +227,7 @@ graf <- cwur_br_g %>%
         plot.title = element_text(family = "charter-bold")) +
   annotate(geom = "curve", x = 2017, xend = 2018, y = 15, yend = 7.3,
            curvature = .3, arrow = arrow(length = unit(2, "mm"))) +
-  annotate(geom = "text", x = 2017, y = 15, hjust = "right", family = "charter",
+  annotate(geom = "text", x = 2017, y = 15, hjust = "right", family = "fira",
            label = "A partir de 2018, a metodologia do CWUR\nfoi revista e aprimorada")
 
 
