@@ -194,7 +194,9 @@ cores <- c("UFRJ"    = "#A49E9E",
 
 library(showtext)
 font_add("charter", "C:/Users/GUILHERME/AppData/Local/Microsoft/Windows/Fonts/Charter Regular.otf")
+font_add("charter-bold", "C:/Users/GUILHERME/AppData/Local/Microsoft/Windows/Fonts/Charter Bold.otf")
 showtext_auto()
+
 theme_set(theme_classic(base_family = "charter"))
 theme_update(legend.position = "none",
              axis.line.y = element_blank(),
@@ -204,21 +206,24 @@ graf <- cwur_br_g %>%
   ggplot(aes(x = ano, y = federal_rank, color = sigla)) +
   geom_point(size = 4) +
   geom_bump(size = 2, smooth = 8) +
-  geom_text(data = cwur_br_g %>% filter(ano == min(ano)),
+  geom_text(data = cwur_br_g %>% filter(ano == min(ano)), family = "charter",
             aes(x = ano - .1, label = sigla), size = 5, hjust = 1) +
-  geom_text(data = cwur_br_g %>% filter(ano == max(ano)),
+  geom_text(data = cwur_br_g %>% filter(ano == max(ano)), family = "charter",
             aes(x = ano + .1, label = sigla), size = 5, hjust = 0) +
+  geom_text(data = cwur_br_g %>% filter(ano == max(ano)), family = "charter",
+            aes(x = ano + 1.1, label = glue::glue("{federal_rank}ª"), size = 5, hjust = 0)) +
   scale_y_reverse(breaks = c(seq(1, 18))) +
-  scale_x_continuous(limits = c(2013.1, 2020.9),
+  scale_x_continuous(limits = c(2013.3, 2021.2),
                      breaks = c(2014, 2015, 2016, 2017, 2018, 2019, 2020)) +
-  scale_color_manual(values = cores) +
+  scale_color_manual(values = cores, guide = F) +
   labs(title = "Evolução das Universidades Federais no Ranking CWUR",
        subtitle = "A UnB destaca-se entre as melhores IES Federais, mantendo a 7ª posição nos últimos três anos",
        x = "Ano de divulgação do ranking",
        y = "") +
   # cowplot::theme_minimal_grid(font_size = 14, line_size = 0) +
-  theme(axis.title.x = element_text(hjust = 1),
-        axis.text.y = element_text(size = 10)) +
+  theme(axis.title.x = element_text(hjust = 0.78),
+        axis.text.y = element_text(size = 10),
+        plot.title = element_text(family = "charter-bold")) +
   annotate(geom = "curve", x = 2017, xend = 2018, y = 15, yend = 7.3,
            curvature = .3, arrow = arrow(length = unit(2, "mm"))) +
   annotate(geom = "text", x = 2017, y = 15, hjust = "right", family = "charter",
