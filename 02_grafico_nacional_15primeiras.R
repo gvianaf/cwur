@@ -70,12 +70,14 @@ graf <- cwur_br_15 %>%
   labs(title = "Evolução das Universidades Brasileiras no Ranking CWUR — 2014 a 2020",
        subtitle = "A <span style='color:#0F4C81'>Universidade de Brasília</span> manteve-se dentre as 15 melhores no Brasil<br>Instituições como Fiocruz e CBPF fizeram sua primeira aparição em 2020",
        x = "Ano de divulgação do ranking",
-       y = "") +
+       y = "",
+       caption = "Fonte: cwur.org\nElaboração: DAI/DPO/UnB") +
   # cowplot::theme_minimal_grid(font_size = 14, line_size = 0) +
   theme(axis.title.x = element_text(hjust = 0.79),
         axis.text.y = element_text(size = 10),
         plot.title = element_text(family = "charter-bold"),
-        plot.subtitle = element_markdown(lineheight = 1.2))
+        plot.subtitle = element_markdown(lineheight = 1.2),
+        plot.caption = element_text(margin = margin(10,0,0,0)))
 
 graf
 ggsave("cwur-nacional-15primeiras.pdf", width = 8, height = 6, device = cairo_pdf)

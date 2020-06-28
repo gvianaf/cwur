@@ -75,7 +75,8 @@ graf <- cwur_br_federal %>%
   labs(title = "Evolução das Universidades Federais no Ranking CWUR",
        subtitle = "A <span style='color:#0F4C81'>Universidade de Brasília</span> destaca-se entre as melhores IES Federais,<br>mantendo a 7ª posição nos últimos três anos",
        x = "Ano de divulgação do ranking",
-       y = "") +
+       y = "",
+       caption = "Fonte: cwur.org\nElaboração: DAI/DPO/UnB") +
   theme_classic(base_family = "charter") +
   theme(legend.position = "none",
         axis.line.y = element_blank(),
@@ -83,7 +84,8 @@ graf <- cwur_br_federal %>%
         axis.title.x = element_text(hjust = 0.78),
         axis.text.y = element_text(size = 10),
         plot.title = element_text(family = "charter-bold"),
-        plot.subtitle = element_markdown(lineheight = 1.2)) +
+        plot.subtitle = element_markdown(lineheight = 1.2),
+        plot.caption = element_text(margin = margin(10,0,0,0))) +
   annotate(geom = "curve", x = 2017, xend = 2018, y = 16, yend = 7.3, curvature = 0.3,
            arrow = arrow(length = unit(2, "mm"))) +
   annotate(geom = "text", x = 2017, y = 16, hjust = 1, family = "fira",
